@@ -19,5 +19,19 @@ Tables and three seeds are automatic, only once. Parameterized queries handle CR
 - [x] Automatic table and three seeds only once.
 - [x] Unchanged A1 CRUD test passes with 200/201/204/400/404 JSON errors.
 - [x] Full compose down/up persistence checked at Stage 4.
-- [ ] New database screenshot and curl transcript pending.
+- [x] New actual psql terminal screenshot supplied by user and live curl transcript recorded.
 - [x] Public repo, six exact stage commits, run command, endpoint table.
+
+Actual curl response (full transcript in verification.txt):
+
+```http
+HTTP/1.1 201 Created
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 57
+content-type: application/json
+```
+
+![Actual new Postgres container tables and persistent rows](postgres-data.png)
+
+The user captured this screenshot from `flyrank03rebuild-db-1`, showing three seed rows and the row retained across full compose down/up. It is evidence from this rebuild, not the earlier project.

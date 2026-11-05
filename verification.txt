@@ -1,0 +1,148 @@
+curl.exe -sS -i -X POST http://localhost:8103/tasks -H Content-Type: application/json -d {"title": "Postgres ' parameter test"}
+
+HTTP/1.1 201 Created
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 57
+content-type: application/json
+
+{"id":7,"title":"Postgres ' parameter test","done":false}
+
+curl.exe -sS -i -X GET http://localhost:8103/tasks
+
+HTTP/1.1 200 OK
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 253
+content-type: application/json
+
+[{"id":1,"title":"Learn APIs","done":false},{"id":2,"title":"Read a book","done":false},{"id":3,"title":"Take a walk","done":false},{"id":5,"title":"compose persistence checkpoint","done":false},{"id":7,"title":"Postgres ' parameter test","done":false}]
+
+curl.exe -sS -i -X GET http://localhost:8103/tasks/7
+
+HTTP/1.1 200 OK
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 57
+content-type: application/json
+
+{"id":7,"title":"Postgres ' parameter test","done":false}
+
+curl.exe -sS -i -X PUT http://localhost:8103/tasks/7 -H Content-Type: application/json -d {"done": true}
+
+HTTP/1.1 200 OK
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 56
+content-type: application/json
+
+{"id":7,"title":"Postgres ' parameter test","done":true}
+
+curl.exe -sS -i -X DELETE http://localhost:8103/tasks/7
+
+HTTP/1.1 204 No Content
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+
+
+
+curl.exe -sS -i -X GET http://localhost:8103/tasks/7
+
+HTTP/1.1 404 Not Found
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 28
+content-type: application/json
+
+{"error":"Task 7 not found"}
+
+curl.exe -sS -i -X PUT http://localhost:8103/tasks/7 -H Content-Type: application/json -d {"done": false}
+
+HTTP/1.1 404 Not Found
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 28
+content-type: application/json
+
+{"error":"Task 7 not found"}
+
+curl.exe -sS -i -X DELETE http://localhost:8103/tasks/7
+
+HTTP/1.1 404 Not Found
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 28
+content-type: application/json
+
+{"error":"Task 7 not found"}
+
+curl.exe -sS -i -X POST http://localhost:8103/tasks -H Content-Type: application/json -d {}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"error":"A non-empty title is required"}
+
+curl.exe -sS -i -X POST http://localhost:8103/tasks -H Content-Type: application/json -d {"title": ""}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"error":"A non-empty title is required"}
+
+curl.exe -sS -i -X POST http://localhost:8103/tasks -H Content-Type: application/json -d {"title": 7}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:24 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"error":"A non-empty title is required"}
+
+curl.exe -sS -i -X POST http://localhost:8103/tasks -H Content-Type: application/json -d {"title": "ok", "done": "bad"}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:25 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"error":"A non-empty title is required"}
+
+curl.exe -sS -i -X PUT http://localhost:8103/tasks/1 -H Content-Type: application/json -d {"title": ""}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:25 GMT
+server: uvicorn
+content-length: 31
+content-type: application/json
+
+{"error":"Invalid task update"}
+
+curl.exe -sS -i -X PUT http://localhost:8103/tasks/1 -H Content-Type: application/json -d {"done": "wrong"}
+
+HTTP/1.1 400 Bad Request
+date: Thu, 05 Nov 2026 07:36:25 GMT
+server: uvicorn
+content-length: 31
+content-type: application/json
+
+{"error":"Invalid task update"}
+
+Real database query:
+
+ id |             title              | done 
+----+--------------------------------+------
+  1 | Learn APIs                     | f
+  2 | Read a book                    | f
+  3 | Take a walk                    | f
+  5 | compose persistence checkpoint | f
+(4 rows)
+
