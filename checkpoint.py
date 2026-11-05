@@ -1,6 +1,7 @@
-from dotenv import load_dotenv
-load_dotenv()
-from repository import Repository
-r=Repository();r.initialize();r.initialize()
-with r.connect() as d: assert d.execute('SELECT COUNT(*) AS n FROM tasks').fetchone()['n']==3
-print('PASS env connection, automatic table and exactly three seeds after restart')
+from fastapi.testclient import TestClient
+from app import app
+with TestClient(app) as c:
+ assert len(c.get('/tasks').json())==3
+ assert c.get('/tasks/1').status_code==200
+ assert c.get('/tasks/999').status_code==404
+ print('PASS Postgres list, single, missing 404')

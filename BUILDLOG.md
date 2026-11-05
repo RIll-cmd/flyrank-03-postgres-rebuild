@@ -9,3 +9,7 @@ Result: ?column?
 ## Stage 1
 Command: C:\Python314\python.exe checkpoint.py
 Result: PASS env connection, automatic table and exactly three seeds after restart
+
+## Stage 2
+Command: C:\Python314\python.exe checkpoint.py
+Result: PASS Postgres list, single, missing 404

@@ -16,3 +16,9 @@ class Repository:
                                ("Learn APIs", "Read a book", "Take a walk"))
                 db.execute("INSERT INTO initialization (id) VALUES (1)")
 
+    def list(self):
+        with self.connect() as db: return db.execute("SELECT * FROM tasks ORDER BY id").fetchall()
+
+    def get(self, task_id):
+        with self.connect() as db: return db.execute("SELECT * FROM tasks WHERE id = %s", (task_id,)).fetchone()
+
