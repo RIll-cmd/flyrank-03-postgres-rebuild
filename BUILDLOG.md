@@ -5,3 +5,7 @@ Result: ?column?
 ----------
         1
 (1 row)
+
+## Stage 1
+Command: C:\Python314\python.exe checkpoint.py
+Result: PASS env connection, automatic table and exactly three seeds after restart
