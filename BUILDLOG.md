@@ -21,3 +21,7 @@ Result: PASS full CRUD: 200/201/204/400/404
 ## Stage 4
 Command: C:\Python314\python.exe stack_checkpoint.py
 Result: PASS docker compose down/up volume persistence, API 201 and 200
+
+## Stage 5
+Command: C:\Python314\python.exe checkpoint.py
+Result: PASS full CRUD: 200/201/204/400/404
