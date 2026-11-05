@@ -12,5 +12,15 @@ services:
       interval: 2s
       timeout: 3s
       retries: 30
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    ports:
+      - "8103:8000"
+    depends_on:
+      db:
+        condition: service_healthy
 volumes:
   postgres_data:
