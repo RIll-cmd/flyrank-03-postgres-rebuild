@@ -13,3 +13,7 @@ Result: PASS env connection, automatic table and exactly three seeds after resta
 ## Stage 2
 Command: C:\Python314\python.exe checkpoint.py
 Result: PASS Postgres list, single, missing 404
+
+## Stage 3
+Command: C:\Python314\python.exe checkpoint.py
+Result: PASS full CRUD: 200/201/204/400/404
